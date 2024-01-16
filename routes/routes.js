@@ -7,8 +7,17 @@ router.get("/",async(req,res)=>{
 res.json(games)
 }) 
 
-router.post("/",(req,res)=>{
-  const {name,email} = req.body
-  res.json({name,email})
+router.post("/",async (req,res)=>{
+  const {title,description,img,trailer,cost,category,platform,release,publisher} = req.body 
+  try{
+   const games = new Games({title,description,img,trailer,cost,category,platform,release,publisher}) 
+   const saveDGames = await games.save()
+   res.json(savedGames)
+  }catch(err){console.log(err.message)}
+}) 
+
+
+router.patch("/update/:id",async(req,res)=>{
+  
 })
 module.exports = router
